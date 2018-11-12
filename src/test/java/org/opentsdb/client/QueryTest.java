@@ -20,16 +20,15 @@ import java.util.Map;
 public class QueryTest {
     @Test
     public void queryTest() throws IOException {
-        HttpClientImpl client = new HttpClientImpl("http://10.75.201.130:4242");
+        HttpClientImpl client = new HttpClientImpl("http://168.61.12.113:4242");
 
 
         QueryBuilder builder = QueryBuilder.getInstance();
         SubQueries subQueries = new SubQueries();
         String zimsum = Aggregator.zimsum.toString();
-        subQueries.addMetric("metric_fund").addTag("product", "HQD").addAggregator(zimsum).addDownsample("1s-" +
-                zimsum);
+        subQueries.addMetric("cpu.busy").addTag("endpoint", "168.61.2.47");
         long now = new Date().getTime() / 1000;
-        builder.getQuery().addStart(126358720).addEnd(now).addSubQuery(subQueries);
+        builder.getQuery().addStart(1541004988).addEnd(now).addSubQuery(subQueries);
         System.out.println(builder.build());
 
         try {
